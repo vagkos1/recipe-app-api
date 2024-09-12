@@ -53,3 +53,41 @@ so, the steps are:
 2. use `docker login` during our job
 3. add secrets to GitHub project (DOCKERHUB_TOKEN and DOCKERHUB_USER)  
 (secrets are encrypted and they are decrypted when needd in actions)
+
+### Django-DB
+
+needs to know:
+- engine (type of database)
+- db name
+- username
+- password
+- hostname (IP address or domain address of the database)
+- port (default is 5432)
+
+defined in `settings.py` based on environment variables
+
+#### psycopg2
+
+psycopg2 is a library for interacting with PostgreSQL databases
+adapter for Django
+
+**installation options**:
+
+- `psycopg2-binary`
+    - OK for development
+    - Not good for production
+- `psycopg2`
+    - compiles from source
+    - requires additional dependencies (gcc, libpq-dev)
+    - easy to install with Docker
+
+We'll go for psycopg2.
+
+Packages for Alpine:
+    - postgresql-client
+    - postgresql-dev
+    - build-base
+    - musl-dev
+
+Docker best practice:
+    - clean up
