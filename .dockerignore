@@ -1,0 +1,17 @@
+# dont add files to docker image
+
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+# Python -> faster builds, cache could be OS-specific anyway
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
+.env/
+.venv/
+venv/

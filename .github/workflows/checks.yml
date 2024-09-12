@@ -1,0 +1,28 @@
+---
+name: Checks
+
+# trigger
+on: [push]
+
+jobs:
+  # id of the job, can be used to reference later
+  test-lint:
+    name: Test and Lint
+    # different runners available, ubuntu is simple and fine
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Login toDocker Hub
+      # lets reuse specific action -> a docker container/configuration -> this one is used to login to docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout
+      # provided by GitHub and checks our code out inside the github actions job
+        uses: actions/checkout@v2
+      - name: Test
+        run: docker compose run --rm app sh -c "python manage.py test"
+      - name: Lint
+        run: docker compose run --rm app sh -c "flake8"
+  
+  # if any of the steps does not return exit 0, the job fails
