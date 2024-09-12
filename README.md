@@ -28,6 +28,12 @@ docker-compose run --rm app sh -c "python manage.py test"
 docker-compose run --rm app sh -c "django-admin startproject app ."
 ```
 
+### Add Django app named core
+
+```text
+docker-compose run --rm app sh -c "python manage.py startapp core"
+```
+
 ### Run the project
 
 ```text
@@ -91,3 +97,6 @@ Packages for Alpine:
 
 Docker best practice:
     - clean up
+
+### We'll also need to make sure that our db is ready when the app starts up.
+<img src="images/db_race_condition.png" alt="db_race_condition" width="500">
